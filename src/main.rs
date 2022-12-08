@@ -54,7 +54,7 @@ fn main() -> ! {
     // is connected to the maple mini onboard LED.
     let mut led = gpiob.pb1.into_push_pull_output(&mut gpiob.crl);
     
-    let mut usb_disc = gpiob.pb9.into_open_drain_output(&mut gpiob.crh);
+    let mut usb_disc = gpiob.pb9.into_push_pull_output(&mut gpiob.crh);
 
    // The `clocks` handle ensures that the clocks are now configured and gives
     // the `Delay::new` function access to the configured frequency. With
@@ -69,8 +69,8 @@ fn main() -> ! {
     usb_disc.set_low();
    
     let mut usb_dp = gpioa.pa12.into_push_pull_output(&mut gpioa.crh);
-    //usb_dp.set_low();
-    //delay(clocks.sysclk().raw() / 100);
+    usb_dp.set_low();
+    delay(clocks.sysclk().raw() / 100);
 
     let usb = Peripheral {
         usb: dp.USB,
